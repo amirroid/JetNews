@@ -1,6 +1,3 @@
-rootProject.name = "JetNews"
-enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
-
 pluginManagement {
     repositories {
         google {
@@ -26,15 +23,12 @@ dependencyResolutionManagement {
         }
         mavenCentral()
     }
-    versionCatalogs.create("androidLibs") {
-        from(files("gradle/androidLibs.versions.toml"))
+    versionCatalogs {
+        create("libs") {
+            from(files("../gradle/libs.versions.toml"))
+        }
     }
 }
 
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
-}
-
-include(":app")
-include(":core:common")
-includeBuild("build-logic")
+rootProject.name = "build-logic"
+include(":convention")
