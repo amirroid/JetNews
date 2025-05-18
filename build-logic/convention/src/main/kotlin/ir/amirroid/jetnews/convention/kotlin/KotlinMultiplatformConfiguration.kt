@@ -1,14 +1,22 @@
 package ir.amirroid.jetnews.convention.kotlin
 
+import ir.amirroid.jetnews.convention.androidMain
+import ir.amirroid.jetnews.convention.commonMain
+import ir.amirroid.jetnews.convention.core.libs
+import org.gradle.api.NamedDomainObjectContainer
+import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
-internal fun configureKotlinMultiplatformPlugins(
+internal fun Project.configureKotlinMultiplatformPlugins(
     extensions: KotlinMultiplatformExtension
 ) {
     extensions.apply {
         applyDefaultHierarchyTemplate()
         androidTarget()
         configureIosTargets()
+        configureCommonMain(sourceSets)
+        configureAndroidMain(sourceSets)
     }
 }
 
@@ -18,5 +26,17 @@ private fun KotlinMultiplatformExtension.configureIosTargets() {
             baseName = "ComposeApp"
             isStatic = true
         }
+    }
+}
+
+private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<KotlinSourceSet>) {
+    sourceSets.commonMain.dependencies {
+        implementation(libs.findLibrary("kotlinx-serialization").get())
+    }
+}
+
+private fun Project.configureAndroidMain(sourceSets: NamedDomainObjectContainer<KotlinSourceSet>) {
+    sourceSets.androidMain.dependencies {
+        implementation(libs.findLibrary("androidx-core-ktx").get())
     }
 }

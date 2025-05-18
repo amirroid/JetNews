@@ -16,6 +16,7 @@ class KotlinMultiplatformPlugin : Plugin<Project> {
     private fun Project.applyRequiredPlugins() {
         pluginManager.apply {
             apply(libs.findPluginId("kotlinMultiplatform"))
+            apply(libs.findPluginId("kotlinx-serialization"))
         }
     }
 
