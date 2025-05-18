@@ -5,7 +5,7 @@ import io.ktor.client.engine.darwin.Darwin
 
 class IosHttpClientProvider : PlatformHttpClientProvider {
     override fun provide(): HttpClient {
-        return HttpClient(Darwin) {}
+        return HttpClient(Darwin)
     }
 }
 

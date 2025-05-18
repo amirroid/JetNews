@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.local.android.library)
     alias(libs.plugins.local.kotlin)
     alias(libs.plugins.local.koin)
+    alias(libs.plugins.local.build.config)
 }
 
 kotlin {
