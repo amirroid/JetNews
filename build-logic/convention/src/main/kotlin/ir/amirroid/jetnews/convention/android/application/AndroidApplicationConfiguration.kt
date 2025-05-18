@@ -1,4 +1,4 @@
-package ir.amirroid.jetnews.convention.android
+package ir.amirroid.jetnews.convention.android.application
 
 import com.android.build.api.dsl.ApplicationExtension
 import ir.amirroid.jetnews.convention.PACKAGE_NAME
@@ -7,7 +7,7 @@ import ir.amirroid.jetnews.convention.core.androidLibs
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 
-fun Project.configureAndroidPlugins(
+internal fun Project.configureAndroidApplicationPlugins(
     extensions: ApplicationExtension
 ) {
     fun String.versionInt(): Int =

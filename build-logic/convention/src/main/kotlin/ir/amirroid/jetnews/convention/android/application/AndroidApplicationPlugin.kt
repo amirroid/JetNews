@@ -1,4 +1,4 @@
-package ir.amirroid.jetnews.convention.android
+package ir.amirroid.jetnews.convention.android.application
 
 import com.android.build.api.dsl.ApplicationExtension
 import ir.amirroid.jetnews.convention.core.libs
@@ -18,6 +18,6 @@ class AndroidApplicationPlugin : Plugin<Project> {
     }
 
     private fun Project.configureExtensions() {
-        extensions.configure<ApplicationExtension>(::configureAndroidPlugins)
+        extensions.configure<ApplicationExtension>(::configureAndroidApplicationPlugins)
     }
 }

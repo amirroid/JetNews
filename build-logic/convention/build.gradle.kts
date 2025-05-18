@@ -37,13 +37,28 @@ gradlePlugin {
         )
         createPlugin(
             name = "multiplatform-plugin",
-            implementationClass = "KotlinMultiplatformPlugin",
+            implementationClass = "ComposeMultiplatformPlugin",
             subNamespace = "compose"
         )
         createPlugin(
-            name = "android-plugin",
+            name = "kotlin-plugin",
+            implementationClass = "KotlinMultiplatformPlugin",
+            subNamespace = "kotlin"
+        )
+        createPlugin(
+            name = "android-application-plugin",
             implementationClass = "AndroidApplicationPlugin",
-            subNamespace = "android"
+            subNamespace = "android.application"
+        )
+        createPlugin(
+            name = "android-library-plugin",
+            implementationClass = "AndroidLibraryPlugin",
+            subNamespace = "android.library"
+        )
+        createPlugin(
+            name = "koin-plugin",
+            implementationClass = "KoinPlugin",
+            subNamespace = "koin"
         )
     }
 }

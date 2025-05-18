@@ -1,5 +1,7 @@
 package ir.amirroid.jetnews.convention.compose
 
+import ir.amirroid.jetnews.convention.androidMain
+import ir.amirroid.jetnews.convention.commonMain
 import ir.amirroid.jetnews.convention.core.composeDependencies
 import ir.amirroid.jetnews.convention.core.libs
 import org.gradle.api.NamedDomainObjectContainer
@@ -7,30 +9,17 @@ import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
-fun Project.configureKotlinMultiplatformPlugins(
+internal fun Project.configureComposeMultiplatformPlugins(
     extensions: KotlinMultiplatformExtension
 ) {
     extensions.apply {
-        androidTarget()
-        configureIosTargets()
-        applyDefaultHierarchyTemplate()
-
         configureCommonMain(sourceSets)
         configureAndroidMain(sourceSets)
     }
 }
 
-private fun KotlinMultiplatformExtension.configureIosTargets() {
-    listOf(iosX64(), iosArm64(), iosSimulatorArm64()).forEach { iosTarget ->
-        iosTarget.binaries.framework {
-            baseName = "ComposeApp"
-            isStatic = true
-        }
-    }
-}
-
 private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<KotlinSourceSet>) {
-    val commonMain = sourceSets.maybeCreate("commonMain")
+    val commonMain = sourceSets.commonMain
     val dependencies = composeDependencies
     commonMain.dependencies {
         implementation(dependencies.runtime)
@@ -46,7 +35,7 @@ private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<K
 }
 
 private fun Project.configureAndroidMain(sourceSets: NamedDomainObjectContainer<KotlinSourceSet>) {
-    val androidMain = sourceSets.maybeCreate("androidMain")
+    val androidMain = sourceSets.androidMain
     androidMain.dependencies {
         implementation(composeDependencies.preview)
         implementation(libs.findLibrary("androidx-activity.compose").get())
