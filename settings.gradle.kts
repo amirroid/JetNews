@@ -38,4 +38,6 @@ plugins {
 include(":app")
 include(":core:common")
 include(":core:network")
+include(":core:design-system")
+
 includeBuild("build-logic")

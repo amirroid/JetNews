@@ -31,6 +31,11 @@ private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<K
 
         implementation(libs.findLibrary("androidx-lifecycle-viewmodel").get())
         implementation(libs.findLibrary("androidx-lifecycle-runtimeCompose").get())
+
+        val designSystemPath = ":core:design-system"
+        if (project.path != designSystemPath) {
+            implementation(project(designSystemPath))
+        }
     }
 }
 
