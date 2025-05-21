@@ -1,4 +1,4 @@
-package ir.amirroid.jetnews.theme
+package ir.amirroid.jetnews.theme.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable

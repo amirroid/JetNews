@@ -1,3 +1,5 @@
+import buildSrc.ProjectPaths
+
 plugins {
     alias(libs.plugins.local.android.library)
     alias(libs.plugins.local.kotlin)
@@ -13,7 +15,7 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
 
-            implementation(project(":core:common"))
+            implementation(project(ProjectPaths.commonBase))
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

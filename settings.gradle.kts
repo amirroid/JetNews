@@ -36,7 +36,8 @@ plugins {
 }
 
 include(":app")
-include(":core:common")
+include(":core:common:base")
+include(":core:common:compose")
 include(":core:network")
 include(":core:design-system")
 

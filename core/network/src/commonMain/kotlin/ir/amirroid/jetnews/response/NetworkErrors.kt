@@ -1,6 +1,6 @@
 package ir.amirroid.jetnews.response
 
-import ir.amirroid.jetnews.common.error.ErrorI
+import ir.amirroid.jetnews.common.base.error.ErrorI
 
 sealed class NetworkErrors : ErrorI {
     data object RequestTimeout : NetworkErrors()

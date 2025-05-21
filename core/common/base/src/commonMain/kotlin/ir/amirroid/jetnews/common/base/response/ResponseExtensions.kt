@@ -1,6 +1,6 @@
-package ir.amirroid.jetnews.common.response
+package ir.amirroid.jetnews.common.base.response
 
-import ir.amirroid.jetnews.common.error.ErrorI
+import ir.amirroid.jetnews.common.base.error.ErrorI
 
 inline fun <D, E : ErrorI, R> Response<D, E>.map(action: (D) -> R): Response<R, E> {
     return when (this) {

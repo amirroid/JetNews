@@ -4,9 +4,11 @@ import ir.amirroid.jetnews.convention.androidMain
 import ir.amirroid.jetnews.convention.commonMain
 import ir.amirroid.jetnews.convention.core.composeDependencies
 import ir.amirroid.jetnews.convention.core.libs
+import org.gradle.api.GradleException
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
+import org.jetbrains.kotlin.gradle.plugin.KotlinDependencyHandler
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
 internal fun Project.configureComposeMultiplatformPlugins(
@@ -15,6 +17,12 @@ internal fun Project.configureComposeMultiplatformPlugins(
     extensions.apply {
         configureCommonMain(sourceSets)
         configureAndroidMain(sourceSets)
+    }
+}
+
+private fun KotlinDependencyHandler.implementIfNotSelf(projectPath: String) {
+    if (project.path != projectPath) {
+        implementation(project(projectPath))
     }
 }
 
@@ -31,10 +39,14 @@ private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<K
 
         implementation(libs.findLibrary("androidx-lifecycle-viewmodel").get())
         implementation(libs.findLibrary("androidx-lifecycle-runtimeCompose").get())
+        implementation(libs.findLibrary("compose-navigation").get())
 
         val designSystemPath = ":core:design-system"
+        val composeCommon = ":core:common:compose"
+
+        implementIfNotSelf(designSystemPath)
         if (project.path != designSystemPath) {
-            implementation(project(designSystemPath))
+            implementIfNotSelf(composeCommon)
         }
     }
 }

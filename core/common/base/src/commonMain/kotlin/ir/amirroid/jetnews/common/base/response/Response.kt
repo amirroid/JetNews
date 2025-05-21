@@ -1,6 +1,6 @@
-package ir.amirroid.jetnews.common.response
+package ir.amirroid.jetnews.common.base.response
 
-import ir.amirroid.jetnews.common.error.ErrorI
+import ir.amirroid.jetnews.common.base.error.ErrorI
 
 sealed interface Response<out D, out E : ErrorI> {
     data class Success<D>(val data: D) : Response<D, Nothing>
