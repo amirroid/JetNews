@@ -8,11 +8,12 @@ sealed interface AppPages {
 
     @Serializable
     data object NestedHome : AppPages {
+        @Serializable
         data object Home : AppPages
     }
 
 
     companion object {
-        val startDestination: AppPages = Splash
+        val startDestination: AppPages = NestedHome
     }
 }

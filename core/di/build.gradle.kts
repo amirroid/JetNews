@@ -8,7 +8,13 @@ plugins {
 
 kotlin.sourceSets.commonMain {
     dependencies {
+        implementation(libs.ktor.client.core)
+
         implementation(project(ProjectPaths.network))
         implementation(project(ProjectPaths.data))
+        implementation(project(ProjectPaths.domain))
+
+        // Features
+        implementation(project(ProjectPaths.home))
     }
 }

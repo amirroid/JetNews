@@ -17,17 +17,17 @@ data class ArticleResponse(
     @SerialName("created_at")
     val createdAt: String,
     @SerialName("crossposted_at")
-    val crosspostedAt: String?,
+    val crossPostedAt: String?,
     val description: String,
     @SerialName("edited_at")
     val editedAt: String?,
     @SerialName("flare_tag")
-    val flareTag: FlareTag?,
+    val flareTag: FlareTag? = null,
     val id: Long,
     val language: String,
     @SerialName("last_comment_at")
     val lastCommentAt: String,
-    val organization: Organization?,
+    val organization: Organization? = null,
     val path: String,
     @SerialName("positive_reactions_count")
     val positiveReactionsCount: Int,
@@ -47,7 +47,7 @@ data class ArticleResponse(
     @SerialName("subforem_id")
     val subforemId: Int,
     @SerialName("tag_list")
-    val tagList: List<String>,
+    val tagList: List<String> = emptyList(),
     val tags: String,
     val title: String,
     @SerialName("type_of")

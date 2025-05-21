@@ -1,8 +1,8 @@
-package ir.amirroid.jetnews.data.usecases.article
+package ir.amirroid.jetnews.domain.usecases.article
 
 import ir.amirroid.jetnews.common.base.response.Response
-import ir.amirroid.jetnews.data.repositories.article.ArticleRepository
 import ir.amirroid.jetnews.domain.models.article.Article
+import ir.amirroid.jetnews.domain.repositories.article.ArticleRepository
 import ir.amirroid.jetnews.response.NetworkErrors
 
 class FetchAllArticlesUseCase(

@@ -5,6 +5,7 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.client.plugins.ServerResponseException
 import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
 import io.ktor.serialization.JsonConvertException
 import io.ktor.util.network.UnresolvedAddressException
 import ir.amirroid.jetnews.common.base.response.Response
@@ -35,11 +36,10 @@ object SafeApiCall {
         } catch (_: Exception) {
             return Response.Error(NetworkErrors.Unknown)
         }
-
         return when (response.status.value) {
+            in 200..299 -> response.trySerialize()
             401 -> Response.Error(NetworkErrors.Unauthorized)
             404 -> Response.Error(NetworkErrors.NotFound)
-            in 200..299 -> response.trySerialize()
             400 -> Response.Error(NetworkErrors.BadRequest)
             408 -> Response.Error(NetworkErrors.RequestTimeout)
             413 -> Response.Error(NetworkErrors.PayloadTooLarge)

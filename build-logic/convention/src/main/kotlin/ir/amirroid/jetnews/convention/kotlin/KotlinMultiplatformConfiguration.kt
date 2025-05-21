@@ -33,6 +33,7 @@ private fun KotlinMultiplatformExtension.configureIosTargets() {
 private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<KotlinSourceSet>) {
     sourceSets.commonMain.dependencies {
         implementation(libs.findLibrary("kotlinx-serialization").get())
+        implementation(libs.findLibrary("kermit").get())
 
         val commonBase = ":core:common:base"
         val network = ":core:network"

@@ -12,6 +12,9 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(ProjectPaths.di))
+
+                // Features
+                implementation(project(ProjectPaths.home))
             }
         }
     }

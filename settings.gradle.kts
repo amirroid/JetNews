@@ -44,4 +44,7 @@ include(":core:di")
 include(":core:network")
 include(":core:design-system")
 
+// Features
+include(":features:home")
+
 includeBuild("build-logic")

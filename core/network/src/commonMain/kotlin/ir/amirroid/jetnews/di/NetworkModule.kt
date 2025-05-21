@@ -15,6 +15,7 @@ import io.ktor.serialization.kotlinx.json.json
 import ir.amirroid.jetnews.API_CONNECT_TIMEOUT_SECONDS
 import ir.amirroid.jetnews.API_REQUEST_TIMEOUT_MILLIS
 import ir.amirroid.jetnews.API_SOCKET_TIMEOUT_SECONDS
+import ir.amirroid.jetnews.HttpClientLogger
 import ir.amirroid.jetnews.client.createHttpClientProvider
 import ir.amirroid.jetnews.config.BuildConfig
 import ir.amirroid.jetnews.qualifiers.BaseUrlQualifier
@@ -33,6 +34,7 @@ val networkModule = module {
 private fun HttpClientConfig<*>.configureLogging() {
     install(Logging) {
         level = LogLevel.BODY
+        logger = HttpClientLogger
     }
 }
 
