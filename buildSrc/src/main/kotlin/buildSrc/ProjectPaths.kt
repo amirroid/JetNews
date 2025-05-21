@@ -7,4 +7,8 @@ object ProjectPaths {
 
     const val commonBase = ":core:common:base"
     const val commonCompose = ":core:common:compose"
+
+    const val data = ":core:data"
+    const val domain = ":core:domain"
+    const val di = ":core:di"
 }

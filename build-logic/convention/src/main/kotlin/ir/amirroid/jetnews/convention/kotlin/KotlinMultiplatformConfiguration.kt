@@ -3,6 +3,7 @@ package ir.amirroid.jetnews.convention.kotlin
 import ir.amirroid.jetnews.convention.androidMain
 import ir.amirroid.jetnews.convention.commonMain
 import ir.amirroid.jetnews.convention.core.libs
+import ir.amirroid.jetnews.convention.implementIfNotSelf
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
@@ -32,6 +33,14 @@ private fun KotlinMultiplatformExtension.configureIosTargets() {
 private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<KotlinSourceSet>) {
     sourceSets.commonMain.dependencies {
         implementation(libs.findLibrary("kotlinx-serialization").get())
+
+        val commonBase = ":core:common:base"
+        val network = ":core:network"
+
+        if (project.path != commonBase) {
+            implementIfNotSelf(network)
+        }
+        implementIfNotSelf(commonBase)
     }
 }
 

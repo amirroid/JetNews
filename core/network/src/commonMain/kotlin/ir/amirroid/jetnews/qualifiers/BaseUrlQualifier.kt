@@ -1,9 +1,5 @@
 package ir.amirroid.jetnews.qualifiers
 
-import org.koin.core.qualifier.Qualifier
-import org.koin.core.qualifier.QualifierValue
+import org.koin.core.qualifier.qualifier
 
-object BaseUrlQualifier : Qualifier {
-    override val value: QualifierValue
-        get() = "base_url"
-}
+val BaseUrlQualifier = qualifier("base_url")

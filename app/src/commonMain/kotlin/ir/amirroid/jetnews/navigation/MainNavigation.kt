@@ -1,15 +1,23 @@
 package ir.amirroid.jetnews.navigation
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -30,12 +38,24 @@ fun MainNavigation() {
                 Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
                 contentAlignment = Alignment.Center
             ) {
-                Button(onClick = {}) {
-                    Text(
-                        "Hello",
-                        fontSize = 24.sp,
-                        fontWeight = FontWeight.Black
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    var state by remember { mutableStateOf("") }
+                    TextField(
+                        value = state,
+                        onValueChange = {
+                            state = it
+                        },
                     )
+                    Button(onClick = {}) {
+                        Text(
+                            "Hello",
+                            fontSize = 24.sp,
+                            fontWeight = FontWeight.Black
+                        )
+                    }
                 }
             }
         }

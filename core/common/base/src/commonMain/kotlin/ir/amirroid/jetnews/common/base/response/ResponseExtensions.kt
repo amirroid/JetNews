@@ -11,6 +11,15 @@ inline fun <D, E : ErrorI, R> Response<D, E>.map(action: (D) -> R): Response<R, 
     }
 }
 
+inline fun <D, E : ErrorI, R> Response<List<D>, E>.mapList(action: (D) -> R): Response<List<R>, E> {
+    return when (this) {
+        is Response.Success -> Response.Success(data.map(action))
+        is Response.Error -> Response.Error(error)
+        Response.Loading -> Response.Loading
+        else -> Response.Idle
+    }
+}
+
 inline fun <D, E : ErrorI> Response<D, E>.onSuccess(action: (D) -> Unit): Response<D, E> {
     return when (this) {
         is Response.Success -> {

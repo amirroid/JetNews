@@ -4,6 +4,7 @@ import ir.amirroid.jetnews.convention.androidMain
 import ir.amirroid.jetnews.convention.commonMain
 import ir.amirroid.jetnews.convention.core.composeDependencies
 import ir.amirroid.jetnews.convention.core.libs
+import ir.amirroid.jetnews.convention.implementIfNotSelf
 import org.gradle.api.GradleException
 import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Project
@@ -20,11 +21,6 @@ internal fun Project.configureComposeMultiplatformPlugins(
     }
 }
 
-private fun KotlinDependencyHandler.implementIfNotSelf(projectPath: String) {
-    if (project.path != projectPath) {
-        implementation(project(projectPath))
-    }
-}
 
 private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<KotlinSourceSet>) {
     val commonMain = sourceSets.commonMain

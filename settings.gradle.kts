@@ -38,6 +38,9 @@ plugins {
 include(":app")
 include(":core:common:base")
 include(":core:common:compose")
+include(":core:data")
+include(":core:domain")
+include(":core:di")
 include(":core:network")
 include(":core:design-system")
 
