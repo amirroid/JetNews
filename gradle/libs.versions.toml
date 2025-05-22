@@ -22,6 +22,8 @@ kermit = "2.0.4"
 coil = "3.2.0"
 proshape = "1.0.0"
 kotlinx-datetime = "0.6.2"
+paging = "3.3.6"
+cmp-paging = "3.3.0-alpha02-0.5.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -69,6 +71,8 @@ kermit = { module = "co.touchlab:kermit", version.ref = "kermit" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coil" }
 coil-ktor = { module = "io.coil-kt.coil3:coil-network-ktor3", version.ref = "coil" }
 
+paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "paging" }
+paging-compose = { module = "app.cash.paging:paging-compose-common", version.ref = "cmp-paging" }
 
 proshape = { module = "com.riadmahi:proshape", version.ref = "proshape" }
 

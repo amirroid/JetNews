@@ -16,6 +16,7 @@ kotlin {
 
                 // Features
                 implementation(project(ProjectPaths.home))
+                implementation(project(ProjectPaths.article))
             }
         }
     }

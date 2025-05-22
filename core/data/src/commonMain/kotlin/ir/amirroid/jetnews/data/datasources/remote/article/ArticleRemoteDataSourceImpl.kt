@@ -5,5 +5,5 @@ import ir.amirroid.jetnews.data.network.services.article.ArticleApiService
 class ArticleRemoteDataSourceImpl(
     private val articleApiService: ArticleApiService
 ) : ArticleRemoteDataSource {
-    override suspend fun getAllArticles() = articleApiService.getAllArticles()
+    override suspend fun getAllArticles(page: Int) = articleApiService.getAllArticles(page)
 }

@@ -9,10 +9,7 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.paging.runtime)
-
             implementation(project(ProjectPaths.domain))
-            implementation(project(ProjectPaths.paging))
         }
     }
 }

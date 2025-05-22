@@ -45,7 +45,7 @@ data class ArticleResponse(
     @SerialName("social_image")
     val socialImage: String,
     @SerialName("subforem_id")
-    val subforemId: Int,
+    val subforemId: Int?,
     @SerialName("tag_list")
     val tagList: List<String> = emptyList(),
     val tags: String,

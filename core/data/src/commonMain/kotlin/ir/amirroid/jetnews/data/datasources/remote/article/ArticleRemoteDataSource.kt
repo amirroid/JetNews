@@ -5,5 +5,5 @@ import ir.amirroid.jetnews.data.models.article.ArticleResponse
 import ir.amirroid.jetnews.response.NetworkErrors
 
 interface ArticleRemoteDataSource {
-    suspend fun getAllArticles(): Response<List<ArticleResponse>, NetworkErrors>
+    suspend fun getAllArticles(page: Int): Response<List<ArticleResponse>, NetworkErrors>
 }

@@ -45,9 +45,11 @@ include(":core:image")
 include(":core:resources")
 include(":core:network")
 include(":core:date")
+include(":core:paging")
 include(":core:design-system")
 
 // Features
 include(":features:home")
+include(":features:article")
 
 includeBuild("build-logic")

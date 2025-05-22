@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">JetNews</string>
+    <string name="error_loading_data">Something went wrong while loading data.</string>
+    <string name="retry">Retry</string>
 </resources>

@@ -1,9 +1,9 @@
 package ir.amirroid.jetnews.domain.repositories.article
 
-import ir.amirroid.jetnews.common.base.response.Response
+import androidx.paging.PagingData
 import ir.amirroid.jetnews.domain.models.article.Article
-import ir.amirroid.jetnews.response.NetworkErrors
+import kotlinx.coroutines.flow.Flow
 
 interface ArticleRepository {
-    suspend fun getAllArticles(): Response<List<Article>, NetworkErrors>
+    fun getAllArticles(): Flow<PagingData<Article>>
 }

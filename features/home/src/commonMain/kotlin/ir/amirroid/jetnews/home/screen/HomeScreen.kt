@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -37,20 +36,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
-import ir.amirroid.jetnews.common.base.response.onError
-import ir.amirroid.jetnews.common.base.response.onLoading
-import ir.amirroid.jetnews.common.base.response.onSuccess
-import ir.amirroid.jetnews.common.components.LoadingContent
 import ir.amirroid.jetnews.common.modifiers.horizontalPadding
 import ir.amirroid.jetnews.common.modifiers.thenIfNotNull
 import ir.amirroid.jetnews.home.models.ArticleUiModel
 import ir.amirroid.jetnews.home.viewmodel.HomeViewModel
+import ir.amirroid.jetnews.paging.components.handlePagingStates
+import ir.amirroid.jetnews.paging.state.LazyPagingSourceState
+import ir.amirroid.jetnews.paging.state.collectAsLazyPagingSourceState
 import ir.amirroid.jetnews.resources.Resources
 import ir.amirroid.jetnews.theme.components.JetCenterAlignedTopAppBar
-import ir.amirroid.jetnews.theme.components.JetMediumTopAppBar
-import ir.amirroid.jetnews.theme.components.JetTopAppBar
 import ir.amirroid.jetnews.theme.locales.extraShapes
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -58,21 +53,19 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = koinViewModel()
+    onClickArticles: (Long) -> Unit,
+    viewModel: HomeViewModel = koinViewModel(),
 ) {
-    val state by viewModel.state.collectAsStateWithLifecycle()
-
-    state
-        .onSuccess { requiredState ->
-            HomeScreenContent(requiredState.articles)
-        }
-        .onError { }
-        .onLoading { LoadingContent() }
+    val articles = viewModel.articles.collectAsLazyPagingSourceState()
+    HomeScreenContent(articles, onClickArticles)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreenContent(articles: List<ArticleUiModel>) {
+fun HomeScreenContent(
+    articles: LazyPagingSourceState<ArticleUiModel>,
+    onClickArticles: (Long) -> Unit,
+) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Column {
         JetCenterAlignedTopAppBar(
@@ -85,20 +78,27 @@ fun HomeScreenContent(articles: List<ArticleUiModel>) {
             contentPadding = WindowInsets.navigationBars.asPaddingValues(),
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
         ) {
-            items(articles, key = { it.id }) { ArticleItem(it) }
+            items(articles.itemCount, key = articles.itemKey { it.id }) { index ->
+                articles[index]?.let {
+                    ArticleItem(it, onClick = {
+                        onClickArticles.invoke(it.id)
+                    })
+                }
+            }
+            handlePagingStates(articles)
         }
     }
 }
 
 @Composable
-fun ArticleItem(article: ArticleUiModel) {
+fun ArticleItem(article: ArticleUiModel, onClick: () -> Unit) {
     var itemHeight by remember { mutableStateOf<Dp?>(null) }
     val density = LocalDensity.current
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { }
+            .clickable(onClick = onClick)
             .horizontalPadding()
             .padding(vertical = 16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
