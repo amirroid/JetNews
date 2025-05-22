@@ -12,6 +12,7 @@ kotlin {
         commonMain {
             dependencies {
                 implementation(project(ProjectPaths.di))
+                implementation(project(ProjectPaths.image))
 
                 // Features
                 implementation(project(ProjectPaths.home))

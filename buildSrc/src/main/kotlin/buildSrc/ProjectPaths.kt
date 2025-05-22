@@ -10,6 +10,7 @@ object ProjectPaths {
 
     const val data = ":core:data"
     const val domain = ":core:domain"
+    const val image = ":core:image"
     const val di = ":core:di"
 
     // Features

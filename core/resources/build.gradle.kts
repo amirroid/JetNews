@@ -5,6 +5,6 @@ plugins {
 
 kotlin.sourceSets.commonMain {
     dependencies {
-        implementation(libs.proshape)
+        implementation(compose.dependencies.components.resources)
     }
 }

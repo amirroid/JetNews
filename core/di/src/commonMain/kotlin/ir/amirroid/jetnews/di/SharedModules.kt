@@ -6,6 +6,7 @@ import ir.amirroid.jetnews.di.modules.dispatchersModule
 import ir.amirroid.jetnews.di.modules.repositoriesModule
 import ir.amirroid.jetnews.di.modules.useCasesModule
 import ir.amirroid.jetnews.di.modules.viewModelModules
+import ir.amirroid.jetnews.image.imageLoaderModule
 
 internal val sharedModules = listOf(
     networkModule,
@@ -14,5 +15,6 @@ internal val sharedModules = listOf(
     datasourceModule,
     repositoriesModule,
     useCasesModule,
-    viewModelModules
+    viewModelModules,
+    imageLoaderModule
 )

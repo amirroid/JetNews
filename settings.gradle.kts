@@ -41,7 +41,10 @@ include(":core:common:compose")
 include(":core:data")
 include(":core:domain")
 include(":core:di")
+include(":core:image")
+include(":core:resources")
 include(":core:network")
+include(":core:date")
 include(":core:design-system")
 
 // Features

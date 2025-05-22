@@ -36,13 +36,18 @@ private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<K
         implementation(libs.findLibrary("androidx-lifecycle-viewmodel").get())
         implementation(libs.findLibrary("androidx-lifecycle-runtimeCompose").get())
         implementation(libs.findLibrary("compose-navigation").get())
+        implementation(libs.findLibrary("coil-compose").get())
 
         val designSystemPath = ":core:design-system"
         val composeCommon = ":core:common:compose"
+        val resources = ":core:resources"
 
-        implementIfNotSelf(designSystemPath)
-        if (project.path != designSystemPath) {
-            implementIfNotSelf(composeCommon)
+        implementIfNotSelf(resources)
+        if (project.path != resources) {
+            implementIfNotSelf(designSystemPath)
+            if (project.path != designSystemPath) {
+                implementIfNotSelf(composeCommon)
+            }
         }
     }
 }

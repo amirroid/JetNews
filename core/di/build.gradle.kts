@@ -13,6 +13,7 @@ kotlin.sourceSets.commonMain {
         implementation(project(ProjectPaths.network))
         implementation(project(ProjectPaths.data))
         implementation(project(ProjectPaths.domain))
+        implementation(project(ProjectPaths.image))
 
         // Features
         implementation(project(ProjectPaths.home))

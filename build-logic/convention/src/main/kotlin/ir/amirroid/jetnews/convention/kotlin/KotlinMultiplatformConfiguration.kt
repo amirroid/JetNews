@@ -37,11 +37,15 @@ private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<K
 
         val commonBase = ":core:common:base"
         val network = ":core:network"
+        val date = ":core:date"
 
-        if (project.path != commonBase) {
-            implementIfNotSelf(network)
+        implementIfNotSelf(date)
+        if (project.path != date) {
+            if (project.path != commonBase) {
+                implementIfNotSelf(network)
+            }
+            implementIfNotSelf(commonBase)
         }
-        implementIfNotSelf(commonBase)
     }
 }
 
