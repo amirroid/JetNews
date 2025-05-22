@@ -1,5 +1,3 @@
-import buildSrc.ProjectPaths
-
 plugins {
     alias(libs.plugins.local.android.library)
     alias(libs.plugins.local.compose.multiplatform)
@@ -9,8 +7,7 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(project(ProjectPaths.composeMarkdown))
-            implementation(project(ProjectPaths.domain))
+            implementation(libs.markdown.m3)
         }
     }
 }

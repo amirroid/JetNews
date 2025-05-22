@@ -45,6 +45,7 @@ include(":core:image")
 include(":core:resources")
 include(":core:network")
 include(":core:date")
+include(":core:compose:markdown")
 include(":core:paging")
 include(":core:design-system")
 

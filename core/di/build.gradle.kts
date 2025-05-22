@@ -17,5 +17,6 @@ kotlin.sourceSets.commonMain {
 
         // Features
         implementation(project(ProjectPaths.home))
+        implementation(project(ProjectPaths.article))
     }
 }

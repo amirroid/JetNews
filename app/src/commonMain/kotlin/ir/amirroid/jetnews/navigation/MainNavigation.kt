@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navigation
-import ir.amirroid.jetnews.article.screen.ArticleScreen
+import ir.amirroid.jetnews.article.screen.ArticleDetailScreen
 import ir.amirroid.jetnews.common.state.LocalAppState
 import ir.amirroid.jetnews.home.screen.HomeScreen
 import ir.amirroid.jetnews.utils.AppPages
@@ -21,7 +21,7 @@ fun MainNavigation() {
         startDestination = AppPages.startDestination
     ) {
         composable<AppPages.Article> {
-            ArticleScreen()
+            ArticleDetailScreen(onBackPress = navController::navigateUp)
         }
         buildNestedHome(navController)
     }

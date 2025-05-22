@@ -138,10 +138,16 @@ fun ArticleItem(article: ArticleUiModel, onClick: () -> Unit) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.alpha(0.8f)
             ) {
+                Icon(
+                    imageVector = vectorResource(Resources.drawable.user),
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
                 Text(
                     text = article.authorUser,
                     style = MaterialTheme.typography.labelSmall,
                     overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
                     modifier = Modifier.weight(1f)
                 )
                 Icon(

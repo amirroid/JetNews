@@ -5,6 +5,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import ir.amirroid.jetnews.call.SafeApiCall
 import ir.amirroid.jetnews.common.base.response.Response
+import ir.amirroid.jetnews.data.models.article.ArticleDetailResponse
 import ir.amirroid.jetnews.data.models.article.ArticleResponse
 import ir.amirroid.jetnews.response.NetworkErrors
 
@@ -15,6 +16,12 @@ class ArticleApiServiceImpl(private val httpClient: HttpClient) : ArticleApiServ
                 parameter("per_page", PER_PAGE_COUNT)
                 parameter("page", page)
             }
+        }
+    }
+
+    override suspend fun getArticle(articleId: Int): Response<ArticleDetailResponse, NetworkErrors> {
+        return SafeApiCall.launch {
+            httpClient.get("$PATH_PREFIX/$articleId")
         }
     }
 

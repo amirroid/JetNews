@@ -24,6 +24,7 @@ proshape = "1.0.0"
 kotlinx-datetime = "0.6.2"
 paging = "3.3.6"
 cmp-paging = "3.3.0-alpha02-0.5.1"
+markdown = "0.33.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -77,6 +78,8 @@ paging-compose = { module = "app.cash.paging:paging-compose-common", version.ref
 proshape = { module = "com.riadmahi:proshape", version.ref = "proshape" }
 
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+markdown-m3 = { module = "com.mikepenz:multiplatform-markdown-renderer-m3", version.ref = "markdown" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

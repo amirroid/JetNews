@@ -1,6 +1,8 @@
 package ir.amirroid.jetnews.data.models.article
 
 
+import ir.amirroid.jetnews.data.models.organization.OrganizationResponse
+import ir.amirroid.jetnews.data.models.user.UserResponse
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerialName
 
@@ -27,7 +29,7 @@ data class ArticleResponse(
     val language: String,
     @SerialName("last_comment_at")
     val lastCommentAt: String,
-    val organization: Organization? = null,
+    val organization: OrganizationResponse? = null,
     val path: String,
     @SerialName("positive_reactions_count")
     val positiveReactionsCount: Int,
@@ -46,6 +48,8 @@ data class ArticleResponse(
     val socialImage: String,
     @SerialName("subforem_id")
     val subforemId: Int?,
+    @SerialName("body_markdown")
+    val bodyMarkdown: String = "",
     @SerialName("tag_list")
     val tagList: List<String> = emptyList(),
     val tags: String,
@@ -53,7 +57,7 @@ data class ArticleResponse(
     @SerialName("type_of")
     val typeOf: String,
     val url: String,
-    val user: User
+    val user: UserResponse
 ) {
     @Serializable
     data class FlareTag(
@@ -62,34 +66,5 @@ data class ArticleResponse(
         val name: String,
         @SerialName("text_color_hex")
         val textColorHex: String
-    )
-
-    @Serializable
-    data class Organization(
-        val name: String,
-        @SerialName("profile_image")
-        val profileImage: String,
-        @SerialName("profile_image_90")
-        val profileImage90: String,
-        val slug: String,
-        val username: String
-    )
-
-    @Serializable
-    data class User(
-        @SerialName("github_username")
-        val githubUsername: String?,
-        val name: String,
-        @SerialName("profile_image")
-        val profileImage: String,
-        @SerialName("profile_image_90")
-        val profileImage90: String,
-        @SerialName("twitter_username")
-        val twitterUsername: String?,
-        @SerialName("user_id")
-        val userId: Int,
-        val username: String,
-        @SerialName("website_url")
-        val websiteUrl: String?
     )
 }
