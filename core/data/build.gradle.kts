@@ -12,6 +12,7 @@ kotlin.sourceSets {
             implementation(libs.paging.runtime)
 
             implementation(project(ProjectPaths.domain))
+            implementation(project(ProjectPaths.database))
         }
     }
 }

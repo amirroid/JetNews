@@ -159,7 +159,7 @@ fun ArticleItem(article: ArticleUiModel, onClick: () -> Unit) {
                 )
                 JetIcon(
                     imageVector = vectorResource(Resources.drawable.comments),
-                    modifier = Modifier.padding(start = 4.dp).size(16.dp)
+                    modifier = Modifier.padding(start = 12.dp).size(16.dp)
                 )
                 JetText(
                     text = article.formattedCommentsCount,

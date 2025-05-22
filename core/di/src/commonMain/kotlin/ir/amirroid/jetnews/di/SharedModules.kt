@@ -16,5 +16,6 @@ internal val sharedModules = listOf(
     repositoriesModule,
     useCasesModule,
     viewModelModules,
-    imageLoaderModule
+    imageLoaderModule,
+    datasourceModule
 )

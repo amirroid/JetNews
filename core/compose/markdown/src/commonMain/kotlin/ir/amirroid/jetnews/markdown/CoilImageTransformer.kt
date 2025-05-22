@@ -34,7 +34,7 @@ internal object CoilImageTransformer : ImageTransformer {
         ).let { painter ->
             ImageData(
                 painter = painter,
-                contentScale = ContentScale.Fit,
+                contentScale = ContentScale.Crop,
                 modifier = Modifier.fillMaxWidth(),
                 alignment = Alignment.Center
             )
