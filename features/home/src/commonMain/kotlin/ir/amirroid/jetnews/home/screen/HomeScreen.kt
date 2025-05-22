@@ -15,9 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -46,6 +44,8 @@ import ir.amirroid.jetnews.paging.state.LazyPagingSourceState
 import ir.amirroid.jetnews.paging.state.collectAsLazyPagingSourceState
 import ir.amirroid.jetnews.resources.Resources
 import ir.amirroid.jetnews.theme.components.JetCenterAlignedTopAppBar
+import ir.amirroid.jetnews.theme.components.JetIcon
+import ir.amirroid.jetnews.theme.components.JetText
 import ir.amirroid.jetnews.theme.locales.extraShapes
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
@@ -70,7 +70,7 @@ fun HomeScreenContent(
     Column {
         JetCenterAlignedTopAppBar(
             title = {
-                Text(stringResource(Resources.string.appName))
+                JetText(stringResource(Resources.string.appName))
             },
             scrollBehavior = scrollBehavior
         )
@@ -125,10 +125,10 @@ fun ArticleItem(article: ArticleUiModel, onClick: () -> Unit) {
                 .fillMaxWidth(),
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Text(
+            JetText(
                 text = article.title,
                 style = MaterialTheme.typography.titleMedium,
-                fontWeight = FontWeight.Bold,
+                fontWeight = FontWeight.Black,
                 overflow = TextOverflow.Ellipsis,
                 modifier = Modifier.thenIfNotNull(itemHeight) { weight(1f) }
             )
@@ -138,33 +138,30 @@ fun ArticleItem(article: ArticleUiModel, onClick: () -> Unit) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.alpha(0.8f)
             ) {
-                Icon(
+                JetIcon(
                     imageVector = vectorResource(Resources.drawable.user),
-                    contentDescription = null,
                     modifier = Modifier.size(16.dp)
                 )
-                Text(
+                JetText(
                     text = article.authorUser,
                     style = MaterialTheme.typography.labelSmall,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
                     modifier = Modifier.weight(1f)
                 )
-                Icon(
+                JetIcon(
                     imageVector = vectorResource(Resources.drawable.clock),
-                    contentDescription = null,
                     modifier = Modifier.size(16.dp)
                 )
-                Text(
+                JetText(
                     text = article.formattedCreatedAt,
                     style = MaterialTheme.typography.labelLarge
                 )
-                Icon(
+                JetIcon(
                     imageVector = vectorResource(Resources.drawable.comments),
-                    contentDescription = null,
                     modifier = Modifier.padding(start = 4.dp).size(16.dp)
                 )
-                Text(
+                JetText(
                     text = article.formattedCommentsCount,
                     style = MaterialTheme.typography.labelLarge
                 )

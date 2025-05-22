@@ -3,7 +3,6 @@ package ir.amirroid.jetnews.article.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
@@ -12,15 +11,12 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -39,6 +35,9 @@ import ir.amirroid.jetnews.common.modifiers.horizontalPadding
 import ir.amirroid.jetnews.common.modifiers.verticalPadding
 import ir.amirroid.jetnews.markdown.CustomMarkdown
 import ir.amirroid.jetnews.resources.Resources
+import ir.amirroid.jetnews.theme.components.JetIcon
+import ir.amirroid.jetnews.theme.components.JetIconButton
+import ir.amirroid.jetnews.theme.components.JetText
 import org.jetbrains.compose.resources.vectorResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -70,13 +69,13 @@ fun ArticleDetail(
     Column {
         LargeTopAppBar(
             title = {
-                Text(article.title, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                JetText(article.title, maxLines = 2, overflow = TextOverflow.Ellipsis)
             },
             navigationIcon = {
-                IconButton(onClick = onBackPress) {
-                    Icon(
+                JetIconButton(onClick = onBackPress) {
+                    JetIcon(
                         imageVector = vectorResource(Resources.drawable.arrowBack),
-                        contentDescription = null,
+                        contentDescription = "back"
                     )
                 }
             },
@@ -95,30 +94,30 @@ fun ArticleDetail(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.alpha(0.8f).horizontalPadding()
             ) {
-                Icon(
+                JetIcon(
                     imageVector = vectorResource(Resources.drawable.user),
                     contentDescription = null,
                     modifier = Modifier.size(16.dp)
                 )
-                Text(
+                JetText(
                     text = article.authorUser,
                     style = MaterialTheme.typography.labelSmall,
                 )
-                Icon(
+                JetIcon(
                     imageVector = vectorResource(Resources.drawable.clock),
                     contentDescription = null,
                     modifier = Modifier.padding(start = 12.dp).size(16.dp)
                 )
-                Text(
+                JetText(
                     text = article.formattedCreatedAt,
                     style = MaterialTheme.typography.labelLarge
                 )
-                Icon(
+                JetIcon(
                     imageVector = vectorResource(Resources.drawable.comments),
                     contentDescription = null,
                     modifier = Modifier.padding(start = 12.dp).size(16.dp)
                 )
-                Text(
+                JetText(
                     text = article.formattedCommentsCount,
                     style = MaterialTheme.typography.labelLarge
                 )
