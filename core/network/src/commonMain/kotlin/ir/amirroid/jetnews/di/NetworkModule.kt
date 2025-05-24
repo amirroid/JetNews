@@ -31,10 +31,12 @@ val networkModule = module {
     }
 }
 
-private fun HttpClientConfig<*>.configureLogging() {
+private fun HttpClientConfig<*>.configureLogging(baseUrl: String) {
     install(Logging) {
         level = LogLevel.BODY
         logger = HttpClientLogger
+
+        filter { it.url.toString().startsWith(baseUrl) }
     }
 }
 
@@ -67,7 +69,7 @@ private fun createConfiguredClient(
     json: Json
 ): HttpClient {
     return createHttpClientProvider().provide().config {
-        configureLogging()
+        configureLogging(baseUrl)
         configureContentNegotiation(json)
         configureTimeout()
         configureDefaultRequest(baseUrl)

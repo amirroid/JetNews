@@ -4,16 +4,17 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.SQLiteDriver
 import androidx.sqlite.driver.bundled.BundledSQLiteDriver
 import ir.amirroid.jetnews.database.AppDatabase
+import ir.amirroid.jetnews.database.dao.ArticleDao
 import kotlinx.coroutines.CoroutineDispatcher
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val databaseModule = module {
-    configureForPlatform()
+    includes(platformModule)
 
-    single { BundledSQLiteDriver() }.bind<SQLiteDriver>()
+    single<SQLiteDriver> { BundledSQLiteDriver() }.bind<SQLiteDriver>()
 
-    single {
+    single<AppDatabase> {
         get<RoomDatabase.Builder<AppDatabase>>()
             .setQueryCoroutineContext(get<CoroutineDispatcher>())
             .setDriver(get())
@@ -22,5 +23,9 @@ val databaseModule = module {
 
     single {
         get<AppDatabase>().articleDao()
+    }
+
+    single {
+        get<AppDatabase>().articleRemoteKeysDao()
     }
 }

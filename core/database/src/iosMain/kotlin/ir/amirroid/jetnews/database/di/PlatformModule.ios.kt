@@ -1,8 +1,10 @@
 package ir.amirroid.jetnews.database.di
 
+import androidx.room.RoomDatabase
+import ir.amirroid.jetnews.database.AppDatabase
 import ir.amirroid.jetnews.database.getDatabaseBuilder
-import org.koin.core.module.Module
+import org.koin.dsl.module
 
-actual fun Module.configureForPlatform() {
-    single { getDatabaseBuilder() }
+internal actual val platformModule = module {
+    single<RoomDatabase.Builder<AppDatabase>> { getDatabaseBuilder() }
 }

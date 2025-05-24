@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.TopAppBarDefaults
@@ -53,7 +54,7 @@ import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeScreen(
-    onClickArticles: (Long) -> Unit,
+    onClickArticles: (Int) -> Unit,
     viewModel: HomeViewModel = koinViewModel(),
 ) {
     val articles = viewModel.articles.collectAsLazyPagingSourceState()
@@ -64,7 +65,7 @@ fun HomeScreen(
 @Composable
 fun HomeScreenContent(
     articles: LazyPagingSourceState<ArticleUiModel>,
-    onClickArticles: (Long) -> Unit,
+    onClickArticles: (Int) -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Column {
@@ -76,7 +77,8 @@ fun HomeScreenContent(
         )
         LazyColumn(
             contentPadding = WindowInsets.navigationBars.asPaddingValues(),
-            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection)
+            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            state = rememberLazyListState()
         ) {
             items(articles.itemCount, key = articles.itemKey { it.id }) { index ->
                 articles[index]?.let {

@@ -10,7 +10,7 @@ sealed interface AppPages {
     }
 
     @Serializable
-    data class Article(val articleId: Long) : AppPages
+    data class Article(val articleId: Int) : AppPages
 
     companion object {
         val startDestination: AppPages = NestedHome

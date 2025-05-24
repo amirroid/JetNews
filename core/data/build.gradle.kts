@@ -10,6 +10,7 @@ kotlin.sourceSets {
         dependencies {
             implementation(libs.ktor.client.core)
             implementation(libs.paging.runtime)
+            implementation(libs.room.runtime)
 
             implementation(project(ProjectPaths.domain))
             implementation(project(ProjectPaths.database))

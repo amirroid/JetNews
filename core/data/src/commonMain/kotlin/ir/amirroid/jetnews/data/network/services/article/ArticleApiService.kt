@@ -8,4 +8,8 @@ import ir.amirroid.jetnews.response.NetworkErrors
 interface ArticleApiService {
     suspend fun getAllArticles(page: Int): Response<List<ArticleResponse>, NetworkErrors>
     suspend fun getArticle(articleId: Int): Response<ArticleDetailResponse, NetworkErrors>
+
+    companion object {
+        const val PER_PAGE_COUNT = 30
+    }
 }

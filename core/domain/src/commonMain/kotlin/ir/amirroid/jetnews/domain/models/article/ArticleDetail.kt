@@ -4,11 +4,11 @@ import ir.amirroid.jetnews.domain.models.user.User
 
 
 data class ArticleDetail(
-    val id: Long,
+    val id: Int,
     val title: String,
     val description: String,
     val coverImage: String?,
-    val language: String,
+    val language: String?,
     val createdAt: String,
     val bodyMarkdown: String,
     val bodyHtml: String,

@@ -1,13 +1,22 @@
 package ir.amirroid.jetnews.database.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.RewriteQueriesToDropUnusedColumns
+import androidx.room.Upsert
 import ir.amirroid.jetnews.database.ARTICLES
 import ir.amirroid.jetnews.database.entities.ArticleEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ArticleDao {
-    @Query("SELECT * FROM $ARTICLES")
-    suspend fun getAll(): Flow<List<ArticleEntity>>
+    @RewriteQueriesToDropUnusedColumns
+    @Query("SELECT DISTINCT * FROM $ARTICLES")
+    fun getPagination(): PagingSource<Int, ArticleEntity>
+
+    @Upsert
+    suspend fun upsertAll(articles: List<ArticleEntity>)
+
+    @Query("DELETE FROM $ARTICLES")
+    suspend fun clear()
 }

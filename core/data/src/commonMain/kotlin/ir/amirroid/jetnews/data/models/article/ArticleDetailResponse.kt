@@ -27,8 +27,8 @@ data class ArticleDetailResponse(
     val description: String,
     @SerialName("edited_at")
     val editedAt: String?,
-    val id: Long,
-    val language: String,
+    val id: Int,
+    val language: String?,
     @SerialName("last_comment_at")
     val lastCommentAt: String,
     val organization: OrganizationResponse? = null,

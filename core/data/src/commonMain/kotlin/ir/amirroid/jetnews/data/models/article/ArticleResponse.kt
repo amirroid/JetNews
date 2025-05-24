@@ -25,8 +25,8 @@ data class ArticleResponse(
     val editedAt: String?,
     @SerialName("flare_tag")
     val flareTag: FlareTag? = null,
-    val id: Long,
-    val language: String,
+    val id: Int,
+    val language: String?,
     @SerialName("last_comment_at")
     val lastCommentAt: String,
     val organization: OrganizationResponse? = null,

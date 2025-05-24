@@ -4,7 +4,7 @@ import androidx.compose.runtime.Immutable
 
 @Immutable
 data class ArticleDetailUiModel(
-    val id: Long,
+    val id: Int,
     val title: String,
     val picture: String?,
     val authorUser: String,

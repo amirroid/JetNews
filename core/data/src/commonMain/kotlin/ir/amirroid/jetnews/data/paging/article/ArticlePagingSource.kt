@@ -1,4 +1,4 @@
-package ir.amirroid.jetnews.data.pagingsources.article
+package ir.amirroid.jetnews.data.paging.article
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

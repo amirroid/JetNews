@@ -1,17 +1,19 @@
-package ir.amirroid.jetnews.data.mappers.article
+package ir.amirroid.jetnews.data.mappers.article_detail
 
-import ir.amirroid.jetnews.data.models.article.ArticleResponse
-import ir.amirroid.jetnews.domain.models.article.Article
+import ir.amirroid.jetnews.data.models.article.ArticleDetailResponse
+import ir.amirroid.jetnews.domain.models.article.ArticleDetail
 import ir.amirroid.jetnews.domain.models.user.User
 
-fun ArticleResponse.toDomain(): Article {
-    return Article(
+fun ArticleDetailResponse.toDomain(): ArticleDetail {
+    return ArticleDetail(
         id = id,
         title = title,
         description = description,
         coverImage = coverImage,
         language = language,
         createdAt = createdAt,
+        bodyMarkdown = bodyMarkdown,
+        bodyHtml = bodyHtml,
         commentsCount = commentsCount,
         user = User(
             name = user.name,

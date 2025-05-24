@@ -12,6 +12,6 @@ class JetNewsApp : Application() {
     }
 
     private fun startKoin() {
-        startAndroidKoin(applicationContext)
+        startAndroidKoin(this)
     }
 }
