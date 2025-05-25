@@ -13,7 +13,7 @@ import ir.amirroid.jetnews.response.NetworkErrors
 class ArticleApiServiceImpl(private val httpClient: HttpClient) : ArticleApiService {
     override suspend fun getAllArticles(page: Int): Response<List<ArticleResponse>, NetworkErrors> {
         return SafeApiCall.launch {
-            httpClient.get("$PATH_PREFIX/latest") {
+            httpClient.get("${PATH_PREFIX}/latest") {
                 parameter("per_page", PER_PAGE_COUNT)
                 parameter("page", page)
             }

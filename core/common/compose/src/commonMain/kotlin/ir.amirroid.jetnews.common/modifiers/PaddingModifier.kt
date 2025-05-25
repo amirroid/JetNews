@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
-private val horizontalPadding = 24.dp
-private val verticalPadding = 16.dp
+val horizontalPadding = 24.dp
+val verticalPadding = 16.dp
 
 fun Modifier.allPadding() = padding(horizontal = horizontalPadding, vertical = verticalPadding)
 

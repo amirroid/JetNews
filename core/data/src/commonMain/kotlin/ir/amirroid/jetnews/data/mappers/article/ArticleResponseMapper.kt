@@ -1,10 +1,11 @@
 package ir.amirroid.jetnews.data.mappers.article
 
+import ir.amirroid.jetnews.data.mappers.user.toDomain
 import ir.amirroid.jetnews.data.models.article.ArticleResponse
-import ir.amirroid.jetnews.database.entities.ArticleEntity
+import ir.amirroid.jetnews.domain.models.article.Article
 
-fun ArticleResponse.toArticleEntity(): ArticleEntity {
-    return ArticleEntity(
+fun ArticleResponse.toDomain(): Article {
+    return Article(
         id = id,
         title = title,
         description = description,
@@ -12,9 +13,6 @@ fun ArticleResponse.toArticleEntity(): ArticleEntity {
         language = language,
         createdAt = createdAt,
         commentsCount = commentsCount,
-        username = user.name,
-        userProfileImage = user.profileImage90,
-        userId = user.userId,
-        userUsername = user.username
+        user = user.toDomain()
     )
 }

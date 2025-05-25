@@ -2,4 +2,6 @@
     <string name="app_name">JetNews</string>
     <string name="error_loading_data">Something went wrong while loading data.</string>
     <string name="retry">Retry</string>
+    <string name="latest">Latest</string>
+    <string name="tags">Tags</string>
 </resources>

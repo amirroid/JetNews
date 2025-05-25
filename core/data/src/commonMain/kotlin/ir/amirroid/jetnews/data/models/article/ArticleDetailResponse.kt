@@ -49,7 +49,7 @@ data class ArticleDetailResponse(
     @SerialName("social_image")
     val socialImage: String,
     @SerialName("subforem_id")
-    val subforemId: Int,
+    val subforemId: Int?,
     @SerialName("tag_list")
     val tagList: String = "",
     val tags: List<String>,

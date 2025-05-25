@@ -18,8 +18,7 @@ class LazyPagingSourceState<T : Any>(
     internal val loadState = lazyPagingItems.loadState
     val itemCount = lazyPagingItems.itemCount
 
-
-    operator fun get(index: Int) = lazyPagingItems.itemSnapshotList.getOrNull(index)
+    operator fun get(index: Int) = lazyPagingItems[index]
     fun itemKey(key: ((item: T) -> Any)? = null) = lazyPagingItems.itemKey(key)
     fun retry() = lazyPagingItems.retry()
     fun refresh() = lazyPagingItems.refresh()

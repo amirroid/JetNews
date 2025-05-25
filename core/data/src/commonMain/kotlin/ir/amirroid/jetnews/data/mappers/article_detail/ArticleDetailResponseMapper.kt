@@ -1,8 +1,8 @@
 package ir.amirroid.jetnews.data.mappers.article_detail
 
+import ir.amirroid.jetnews.data.mappers.user.toDomain
 import ir.amirroid.jetnews.data.models.article.ArticleDetailResponse
 import ir.amirroid.jetnews.domain.models.article.ArticleDetail
-import ir.amirroid.jetnews.domain.models.user.User
 
 fun ArticleDetailResponse.toDomain(): ArticleDetail {
     return ArticleDetail(
@@ -15,11 +15,7 @@ fun ArticleDetailResponse.toDomain(): ArticleDetail {
         bodyMarkdown = bodyMarkdown,
         bodyHtml = bodyHtml,
         commentsCount = commentsCount,
-        user = User(
-            name = user.name,
-            profileImage = user.profileImage90,
-            userId = user.userId,
-            username = user.username
-        )
+        user = user.toDomain(),
+        tags = tags
     )
 }

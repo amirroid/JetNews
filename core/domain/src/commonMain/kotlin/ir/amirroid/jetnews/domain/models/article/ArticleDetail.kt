@@ -13,5 +13,6 @@ data class ArticleDetail(
     val bodyMarkdown: String,
     val bodyHtml: String,
     val commentsCount: Int,
-    val user: User
+    val user: User,
+    val tags: List<String>
 )

@@ -13,6 +13,7 @@ fun ArticleDetail.toUiModel(): ArticleDetailUiModel {
         authorUser = user.name,
         formattedCommentsCount = commentsCount.formatWithThousandsSeparator(),
         formattedCreatedAt = createdAt.formatDayMonthWithOptionalYear(),
-        markdownContent = bodyMarkdown
+        markdownContent = bodyMarkdown,
+        tags = tags
     )
 }

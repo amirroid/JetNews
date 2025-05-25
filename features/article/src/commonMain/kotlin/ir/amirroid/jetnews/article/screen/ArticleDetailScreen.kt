@@ -3,13 +3,14 @@ package ir.amirroid.jetnews.article.screen
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.MaterialTheme
@@ -17,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -33,11 +35,16 @@ import ir.amirroid.jetnews.common.base.response.onSuccess
 import ir.amirroid.jetnews.common.components.LoadingContent
 import ir.amirroid.jetnews.common.modifiers.horizontalPadding
 import ir.amirroid.jetnews.common.modifiers.verticalPadding
-import ir.amirroid.jetnews.markdown.CustomMarkdown
+import ir.amirroid.jetnews.common.operators.plus
+import ir.amirroid.jetnews.markdown.LazyMarkdown
 import ir.amirroid.jetnews.resources.Resources
+import ir.amirroid.jetnews.theme.components.JetAssistChip
+import ir.amirroid.jetnews.theme.components.JetCenterAlignedTopAppBar
 import ir.amirroid.jetnews.theme.components.JetIcon
 import ir.amirroid.jetnews.theme.components.JetIconButton
 import ir.amirroid.jetnews.theme.components.JetText
+import ir.amirroid.jetnews.theme.components.JetTopAppBar
+import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.resources.vectorResource
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -64,12 +71,11 @@ fun ArticleDetail(
     article: ArticleDetailUiModel,
     onBackPress: () -> Unit,
 ) {
-    val scrollState = rememberScrollState()
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
     Column {
-        LargeTopAppBar(
+        JetCenterAlignedTopAppBar(
             title = {
-                JetText(article.title, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                JetText(stringResource(Resources.string.appName))
             },
             navigationIcon = {
                 JetIconButton(onClick = onBackPress) {
@@ -81,63 +87,106 @@ fun ArticleDetail(
             },
             scrollBehavior = scrollBehavior
         )
-        Column(
+        SelectionContainer(
             modifier = Modifier
                 .nestedScroll(scrollBehavior.nestedScrollConnection)
-                .verticalScroll(scrollState)
-                .navigationBarsPadding()
-                .verticalPadding(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            FlowRow(
-                verticalArrangement = Arrangement.Center,
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.alpha(0.8f).horizontalPadding()
-            ) {
-                JetIcon(
-                    imageVector = vectorResource(Resources.drawable.user),
-                    contentDescription = null,
-                    modifier = Modifier.size(16.dp)
-                )
-                JetText(
-                    text = article.authorUser,
-                    style = MaterialTheme.typography.labelSmall,
-                )
-                JetIcon(
-                    imageVector = vectorResource(Resources.drawable.clock),
-                    contentDescription = null,
-                    modifier = Modifier.padding(start = 12.dp).size(16.dp)
-                )
-                JetText(
-                    text = article.formattedCreatedAt,
-                    style = MaterialTheme.typography.labelLarge
-                )
-                JetIcon(
-                    imageVector = vectorResource(Resources.drawable.comments),
-                    contentDescription = null,
-                    modifier = Modifier.padding(start = 12.dp).size(16.dp)
-                )
-                JetText(
-                    text = article.formattedCommentsCount,
-                    style = MaterialTheme.typography.labelLarge
-                )
-            }
-            article.picture?.let {
-                AsyncImage(
-                    model = it,
-                    contentDescription = article.title,
-                    modifier = Modifier.fillMaxWidth(),
-                    contentScale = ContentScale.FillWidth
-                )
-            }
-            SelectionContainer {
-                CustomMarkdown(
-                    content = article.markdownContent,
-                    modifier = Modifier
-                        .horizontalPadding()
-                        .fillMaxWidth()
-                )
-            }
+            LazyMarkdown(
+                content = article.markdownContent,
+                modifier = Modifier
+                    .horizontalPadding()
+                    .fillMaxWidth(),
+                paddingValues = WindowInsets.navigationBars.asPaddingValues() + PaddingValues(
+                    vertical = verticalPadding
+                ),
+                verticalArrangement = Arrangement.spacedBy(12.dp),
+                beforeMarkdownScope = {
+                    item("title") {
+                        JetText(
+                            article.title,
+                            style = MaterialTheme.typography.headlineMedium,
+                            modifier = Modifier.horizontalPadding()
+                        )
+                    }
+                    item("article_info") {
+                        ArticleInfo(article)
+                    }
+                    if (article.tags.isNotEmpty()) {
+                        item("tags") {
+                            ArticleTags(article)
+                        }
+                    }
+                    article.picture?.let {
+                        item("picture_bar") {
+                            AsyncImage(
+                                model = it,
+                                contentDescription = article.title,
+                                modifier = Modifier.fillMaxWidth(),
+                                contentScale = ContentScale.FillWidth
+                            )
+                        }
+                    }
+                }
+            )
+        }
+    }
+}
+
+@Composable
+fun ArticleInfo(article: ArticleDetailUiModel) {
+    FlowRow(
+        verticalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.alpha(0.8f).horizontalPadding()
+    ) {
+        JetIcon(
+            imageVector = vectorResource(Resources.drawable.user),
+            contentDescription = null,
+            modifier = Modifier.size(16.dp)
+        )
+        JetText(
+            text = article.authorUser,
+            style = MaterialTheme.typography.labelLarge,
+        )
+        JetIcon(
+            imageVector = vectorResource(Resources.drawable.clock),
+            contentDescription = null,
+            modifier = Modifier.padding(start = 12.dp).size(16.dp)
+        )
+        JetText(
+            text = article.formattedCreatedAt,
+            style = MaterialTheme.typography.labelLarge
+        )
+        JetIcon(
+            imageVector = vectorResource(Resources.drawable.comments),
+            contentDescription = null,
+            modifier = Modifier.padding(start = 12.dp).size(16.dp)
+        )
+        JetText(
+            text = article.formattedCommentsCount,
+            style = MaterialTheme.typography.labelLarge
+        )
+    }
+}
+
+@Composable
+fun ArticleTags(article: ArticleDetailUiModel) {
+    FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        modifier = Modifier.alpha(0.8f).horizontalPadding(),
+        itemVerticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            text = stringResource(Resources.string.tags) + ":",
+            style = MaterialTheme.typography.labelMedium
+        )
+        article.tags.forEach {
+            JetAssistChip(
+                onClick = {},
+                label = {
+                    JetText(it)
+                }
+            )
         }
     }
 }

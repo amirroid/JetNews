@@ -31,8 +31,11 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
@@ -68,17 +71,26 @@ fun HomeScreenContent(
     onClickArticles: (Int) -> Unit,
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    val lazyListState = rememberLazyListState()
     Column {
         JetCenterAlignedTopAppBar(
             title = {
-                JetText(stringResource(Resources.string.appName))
+                JetText(
+                    buildAnnotatedString {
+                        append(stringResource(Resources.string.appName))
+                        withStyle(SpanStyle(MaterialTheme.colorScheme.primary)) {
+                            append(" ")
+                            append(stringResource(Resources.string.latest))
+                        }
+                    }
+                )
             },
             scrollBehavior = scrollBehavior
         )
         LazyColumn(
             contentPadding = WindowInsets.navigationBars.asPaddingValues(),
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-            state = rememberLazyListState()
+            state = lazyListState
         ) {
             items(articles.itemCount, key = articles.itemKey { it.id }) { index ->
                 articles[index]?.let {
@@ -157,7 +169,7 @@ fun ArticleItem(article: ArticleUiModel, onClick: () -> Unit) {
                 )
                 JetText(
                     text = article.formattedCreatedAt,
-                    style = MaterialTheme.typography.labelLarge
+                    style = MaterialTheme.typography.labelSmall
                 )
                 JetIcon(
                     imageVector = vectorResource(Resources.drawable.comments),
@@ -165,7 +177,7 @@ fun ArticleItem(article: ArticleUiModel, onClick: () -> Unit) {
                 )
                 JetText(
                     text = article.formattedCommentsCount,
-                    style = MaterialTheme.typography.labelLarge
+                    style = MaterialTheme.typography.labelSmall
                 )
             }
         }

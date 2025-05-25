@@ -14,7 +14,6 @@ kotlin.sourceSets.commonMain {
         implementation(project(ProjectPaths.data))
         implementation(project(ProjectPaths.domain))
         implementation(project(ProjectPaths.image))
-        implementation(project(ProjectPaths.database))
 
         // Features
         implementation(project(ProjectPaths.home))

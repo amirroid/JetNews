@@ -13,7 +13,6 @@ kotlin.sourceSets {
             implementation(libs.room.runtime)
 
             implementation(project(ProjectPaths.domain))
-            implementation(project(ProjectPaths.database))
         }
     }
 }

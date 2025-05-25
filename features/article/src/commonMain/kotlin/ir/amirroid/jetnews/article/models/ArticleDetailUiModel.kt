@@ -10,5 +10,6 @@ data class ArticleDetailUiModel(
     val authorUser: String,
     val formattedCommentsCount: String,
     val formattedCreatedAt: String,
-    val markdownContent: String
+    val markdownContent: String,
+    val tags: List<String>
 )
