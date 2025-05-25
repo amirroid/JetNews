@@ -57,7 +57,7 @@ core/
   ├─ di/                      # Koin modules
   └─ common/
        ├─ compose/            # Shared Compose utilities
-       └─ base/               # Base ViewModel, models, state
+       └─ base/               # models, state
 
 features/
   ├─ home/                    # Home screen and logic
