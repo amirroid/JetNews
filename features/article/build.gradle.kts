@@ -9,6 +9,8 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
+            implementation(libs.html.converter)
+
             implementation(project(ProjectPaths.composeMarkdown))
             implementation(project(ProjectPaths.domain))
         }

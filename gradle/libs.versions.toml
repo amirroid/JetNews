@@ -28,6 +28,7 @@ markdown = "0.33.0"
 room = "2.7.1"
 sqlite = "2.5.1"
 ksp = "2.1.21-2.0.1"
+html-converter = "1.0.4"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -89,6 +90,8 @@ room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-paging = { group = "androidx.room", name = "room-paging", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 sqlite-bundled = { module = "androidx.sqlite:sqlite-bundled", version.ref = "sqlite" }
+
+html-converter = { module = "be.digitalia.compose.htmlconverter:htmlconverter", version.ref = "html-converter" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

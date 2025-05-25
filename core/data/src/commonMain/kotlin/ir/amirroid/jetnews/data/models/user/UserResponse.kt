@@ -6,17 +6,17 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class UserResponse(
     @SerialName("github_username")
-    val githubUsername: String?,
-    val name: String,
+    val githubUsername: String? = null,
+    val name: String = "null",
     @SerialName("profile_image")
-    val profileImage: String,
+    val profileImage: String? = null,
     @SerialName("profile_image_90")
-    val profileImage90: String,
+    val profileImage90: String? = null,
     @SerialName("twitter_username")
-    val twitterUsername: String?,
+    val twitterUsername: String? = null,
     @SerialName("user_id")
-    val userId: Int,
-    val username: String,
+    val userId: Int = 0,
+    val username: String = "",
     @SerialName("website_url")
-    val websiteUrl: String?
+    val websiteUrl: String? = null
 )

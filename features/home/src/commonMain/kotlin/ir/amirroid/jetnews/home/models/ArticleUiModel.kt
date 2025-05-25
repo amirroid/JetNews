@@ -8,6 +8,7 @@ data class ArticleUiModel(
     val title: String,
     val picture: String?,
     val authorUser: String,
+    val userProfilePicture: String?,
     val formattedCommentsCount: String,
     val formattedCreatedAt: String
 )

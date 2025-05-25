@@ -1,5 +1,6 @@
 package ir.amirroid.jetnews.home.screen
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -123,7 +124,7 @@ fun ArticleItem(article: ArticleUiModel, onClick: () -> Unit) {
                 contentDescription = article.title,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .clip(extraShapes.medium)
+                    .clip(extraShapes.large)
                     .widthIn(max = 300.dp)
                     .fillMaxWidth(0.3f)
                     .aspectRatio(1f)
@@ -152,9 +153,13 @@ fun ArticleItem(article: ArticleUiModel, onClick: () -> Unit) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier.alpha(0.8f)
             ) {
-                JetIcon(
-                    imageVector = vectorResource(Resources.drawable.user),
-                    modifier = Modifier.size(16.dp)
+                AsyncImage(
+                    model = article.userProfilePicture ?: Resources.drawable.user,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .clip(extraShapes.medium).size(16.dp)
+                        .background(MaterialTheme.colorScheme.surface),
+                    contentScale = ContentScale.Crop
                 )
                 JetText(
                     text = article.authorUser,

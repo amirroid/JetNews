@@ -12,6 +12,7 @@ fun Article.toUiModel(): ArticleUiModel {
         picture = coverImage,
         authorUser = user.name,
         formattedCommentsCount = commentsCount.formatWithThousandsSeparator(),
-        formattedCreatedAt = createdAt.formatDayMonthWithOptionalYear()
+        formattedCreatedAt = createdAt.formatDayMonthWithOptionalYear(),
+        userProfilePicture = user.profileImage
     )
 }

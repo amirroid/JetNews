@@ -14,6 +14,7 @@ fun ArticleDetail.toUiModel(): ArticleDetailUiModel {
         formattedCommentsCount = commentsCount.formatWithThousandsSeparator(),
         formattedCreatedAt = createdAt.formatDayMonthWithOptionalYear(),
         markdownContent = bodyMarkdown,
-        tags = tags
+        tags = tags,
+        userProfilePicture = user.profileImage
     )
 }
