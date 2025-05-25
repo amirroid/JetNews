@@ -164,10 +164,6 @@ fun ArticleInfo(article: ArticleDetailUiModel) {
         modifier = Modifier.alpha(0.8f).horizontalPadding(),
         itemVerticalAlignment = Alignment.CenterVertically
     ) {
-        JetIcon(
-            imageVector = vectorResource(Resources.drawable.user),
-            contentDescription = null,
-        )
         AsyncImage(
             model = article.userProfilePicture ?: Resources.drawable.user,
             contentDescription = null,
@@ -237,7 +233,7 @@ fun CommentItem(comment: CommentUiModel, index: Int) {
     Row(
         modifier = Modifier
             .horizontalPadding()
-            .padding(start = 24.dp * index.minus(1).coerceAtLeast(0))
+            .padding(start = horizontalPadding * index.minus(1).coerceAtLeast(0))
     ) {
         if (index != 0) {
             Icon(
