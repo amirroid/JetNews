@@ -30,9 +30,9 @@ UseCase (core/domain)
    ↓
 Repository (core/data)
    ↓
-RemoteDataSource (core/network)
+RemoteDataSource (core/data)
    ↓
-ApiService (Ktor implementation)
+ApiService (core/data)
 ```
 
 Each layer has a single responsibility, is testable in isolation, and is implemented in a modular
