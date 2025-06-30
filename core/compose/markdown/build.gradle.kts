@@ -8,6 +8,7 @@ kotlin {
     sourceSets {
         commonMain.dependencies {
             implementation(libs.markdown.m3)
+            implementation(libs.markdown.code)
         }
     }
 }

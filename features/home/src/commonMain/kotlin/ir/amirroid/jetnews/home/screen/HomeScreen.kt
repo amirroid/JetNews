@@ -83,15 +83,15 @@ fun HomeScreenContent(
                             append(" ")
                             append(stringResource(Resources.string.latest))
                         }
-                    }
+                    },
                 )
             },
-            scrollBehavior = scrollBehavior
+            scrollBehavior = scrollBehavior,
         )
         LazyColumn(
             contentPadding = WindowInsets.navigationBars.asPaddingValues(),
             modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-            state = lazyListState
+            state = lazyListState,
         ) {
             items(articles.itemCount, key = articles.itemKey { it.id }) { index ->
                 articles[index]?.let {
@@ -106,83 +106,91 @@ fun HomeScreenContent(
 }
 
 @Composable
-fun ArticleItem(article: ArticleUiModel, onClick: () -> Unit) {
+fun ArticleItem(
+    article: ArticleUiModel,
+    onClick: () -> Unit,
+) {
     var itemHeight by remember { mutableStateOf<Dp?>(null) }
     val density = LocalDensity.current
 
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onClick)
-            .horizontalPadding()
-            .padding(vertical = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        modifier =
+            Modifier
+                .fillMaxWidth()
+                .clickable(onClick = onClick)
+                .horizontalPadding()
+                .padding(vertical = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         article.picture?.let { picture ->
             AsyncImage(
                 model = picture,
                 contentDescription = article.title,
                 contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .clip(extraShapes.large)
-                    .widthIn(max = 300.dp)
-                    .fillMaxWidth(0.3f)
-                    .aspectRatio(1f)
-                    .onSizeChanged {
-                        itemHeight = with(density) { it.height.toDp() }
-                    }
+                modifier =
+                    Modifier
+                        .clip(extraShapes.large)
+                        .widthIn(max = 300.dp)
+                        .fillMaxWidth(0.3f)
+                        .aspectRatio(1f)
+                        .onSizeChanged {
+                            itemHeight = with(density) { it.height.toDp() }
+                        },
             )
         }
 
         Column(
-            modifier = Modifier
-                .thenIfNotNull(itemHeight) { height(it) }
-                .fillMaxWidth(),
-            verticalArrangement = Arrangement.spacedBy(12.dp)
+            modifier =
+                Modifier
+                    .thenIfNotNull(itemHeight) { height(it) }
+                    .fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
             JetText(
                 text = article.title,
                 style = MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Black,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.thenIfNotNull(itemHeight) { weight(1f) }
+                modifier = Modifier.thenIfNotNull(itemHeight) { weight(1f) },
             )
 
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.alpha(0.8f)
+                modifier = Modifier.alpha(0.8f),
             ) {
                 AsyncImage(
                     model = article.userProfilePicture ?: Resources.drawable.user,
                     contentDescription = null,
-                    modifier = Modifier
-                        .clip(extraShapes.medium).size(16.dp)
-                        .background(MaterialTheme.colorScheme.surface),
-                    contentScale = ContentScale.Crop
+                    modifier =
+                        Modifier
+                            .clip(extraShapes.medium)
+                            .size(16.dp)
+                            .background(MaterialTheme.colorScheme.surface),
+                    contentScale = ContentScale.Crop,
                 )
                 JetText(
                     text = article.authorUser,
                     style = MaterialTheme.typography.labelSmall,
                     overflow = TextOverflow.Ellipsis,
                     maxLines = 1,
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier.weight(1f),
                 )
                 JetIcon(
                     imageVector = vectorResource(Resources.drawable.clock),
-                    modifier = Modifier.size(16.dp)
+                    modifier = Modifier.size(16.dp),
                 )
                 JetText(
                     text = article.formattedCreatedAt,
-                    style = MaterialTheme.typography.labelSmall
+                    style = MaterialTheme.typography.labelSmall,
                 )
                 JetIcon(
                     imageVector = vectorResource(Resources.drawable.comments),
-                    modifier = Modifier.padding(start = 12.dp).size(16.dp)
+                    modifier = Modifier.padding(start = 12.dp).size(16.dp),
                 )
                 JetText(
                     text = article.formattedCommentsCount,
-                    style = MaterialTheme.typography.labelSmall
+                    style = MaterialTheme.typography.labelSmall,
                 )
             }
         }

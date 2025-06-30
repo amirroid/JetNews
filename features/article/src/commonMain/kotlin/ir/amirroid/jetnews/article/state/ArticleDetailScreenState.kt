@@ -7,5 +7,5 @@ import ir.amirroid.jetnews.article.models.CommentUiModel
 @Immutable
 data class ArticleDetailScreenState(
     val article: ArticleDetailUiModel,
-    val comments: List<CommentUiModel>
+    val comments: List<CommentUiModel>,
 )

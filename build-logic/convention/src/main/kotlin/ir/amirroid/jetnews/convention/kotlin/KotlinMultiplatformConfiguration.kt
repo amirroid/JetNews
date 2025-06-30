@@ -9,9 +9,7 @@ import org.gradle.api.Project
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
-internal fun Project.configureKotlinMultiplatformPlugins(
-    extensions: KotlinMultiplatformExtension
-) {
+internal fun Project.configureKotlinMultiplatformPlugins(extensions: KotlinMultiplatformExtension) {
     extensions.apply {
         applyDefaultHierarchyTemplate()
         androidTarget()
