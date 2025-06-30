@@ -2,12 +2,14 @@ package ir.amirroid.jetnews.article.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
@@ -38,8 +40,8 @@ import ir.amirroid.jetnews.common.base.response.onError
 import ir.amirroid.jetnews.common.base.response.onLoading
 import ir.amirroid.jetnews.common.base.response.onSuccess
 import ir.amirroid.jetnews.common.components.LoadingContent
+import ir.amirroid.jetnews.common.components.PagingErrorButton
 import ir.amirroid.jetnews.common.modifiers.horizontalPadding
-import ir.amirroid.jetnews.common.modifiers.topPadding
 import ir.amirroid.jetnews.common.modifiers.verticalPadding
 import ir.amirroid.jetnews.common.operators.plus
 import ir.amirroid.jetnews.markdown.LazyMarkdown
@@ -69,7 +71,9 @@ fun ArticleDetailScreen(
         }
         .onLoading { LoadingContent() }
         .onError {
-            Text(it.toString())
+            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                PagingErrorButton(onRetry = viewModel::retry)
+            }
         }
 }
 
@@ -104,8 +108,8 @@ fun ArticleDetail(
             LazyMarkdown(
                 content = article.markdownContent,
                 modifier = Modifier
-                    .horizontalPadding()
-                    .fillMaxWidth(),
+                    .fillMaxSize(),
+                itemsModifier = Modifier.horizontalPadding(),
                 paddingValues = WindowInsets.navigationBars.asPaddingValues() + PaddingValues(
                     vertical = verticalPadding
                 ),
@@ -114,6 +118,7 @@ fun ArticleDetail(
                         JetText(
                             article.title,
                             style = MaterialTheme.typography.headlineMedium,
+                            modifier = Modifier.horizontalPadding()
                         )
                     }
                     item("article_info") {
@@ -140,7 +145,7 @@ fun ArticleDetail(
                         item("comments_bar") {
                             JetText(
                                 "Comments",
-                                modifier = Modifier.padding(top = 36.dp),
+                                modifier = Modifier.horizontalPadding().padding(top = 36.dp),
                                 style = MaterialTheme.typography.titleLarge
                             )
                         }
@@ -159,7 +164,7 @@ fun ArticleInfo(article: ArticleDetailUiModel, modifier: Modifier = Modifier) {
     FlowRow(
         verticalArrangement = Arrangement.Center,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = modifier.alpha(0.8f),
+        modifier = modifier.alpha(0.8f).horizontalPadding(),
         itemVerticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
@@ -199,7 +204,7 @@ fun ArticleInfo(article: ArticleDetailUiModel, modifier: Modifier = Modifier) {
 fun ArticleTags(article: ArticleDetailUiModel, modifier: Modifier = Modifier) {
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = modifier.alpha(0.8f),
+        modifier = modifier.alpha(0.8f).horizontalPadding(),
         itemVerticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -230,6 +235,7 @@ fun LazyListScope.commentItem(comment: CommentUiModel, index: Int = 0) {
 fun CommentItem(comment: CommentUiModel, index: Int, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
+            .horizontalPadding()
             .padding(start = horizontalPadding * index.minus(1).coerceAtLeast(0))
     ) {
         if (index != 0) {

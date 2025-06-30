@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 fun LazyMarkdown(
     content: String,
     modifier: Modifier = Modifier,
+    itemsModifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(),
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     beforeMarkdownScope: LazyListScope.() -> Unit = {},
@@ -23,6 +24,7 @@ fun LazyMarkdown(
                 state = state,
                 components = components,
                 modifier = modifier,
+                itemsModifier = itemsModifier,
                 paddingValues = paddingValues,
                 verticalArrangement = verticalArrangement,
                 beforeMarkdownScope = beforeMarkdownScope,

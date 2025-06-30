@@ -54,4 +54,6 @@ class ArticleDetailViewModel(
             }
         }
     }
+
+    fun retry() = fetchArticleDetail()
 }

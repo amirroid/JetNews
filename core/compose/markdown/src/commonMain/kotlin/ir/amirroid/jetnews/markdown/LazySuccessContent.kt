@@ -1,7 +1,9 @@
 package ir.amirroid.jetnews.markdown
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -18,6 +20,7 @@ fun LazySuccessContent(
     state: State.Success,
     components: MarkdownComponents,
     modifier: Modifier = Modifier,
+    itemsModifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(),
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     beforeMarkdownScope: LazyListScope.() -> Unit = {},
@@ -33,12 +36,14 @@ fun LazySuccessContent(
         beforeMarkdownScope.invoke(this)
 
         itemsIndexed(state.node.children, key = { index, _ -> index }) { index, node ->
-            MarkdownElement(
-                node,
-                components,
-                state.content,
-                skipLinkDefinition = state.linksLookedUp
-            )
+            Box(itemsModifier.fillMaxWidth()) {
+                MarkdownElement(
+                    node,
+                    components,
+                    state.content,
+                    skipLinkDefinition = state.linksLookedUp,
+                )
+            }
         }
         afterMarkdownScope.invoke(this)
     }
