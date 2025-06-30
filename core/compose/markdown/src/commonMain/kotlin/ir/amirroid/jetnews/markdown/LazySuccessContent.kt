@@ -4,9 +4,11 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.mikepenz.markdown.compose.MarkdownElement
 import com.mikepenz.markdown.compose.MarkdownSuccess
 import com.mikepenz.markdown.compose.components.MarkdownComponents
 import com.mikepenz.markdown.model.State
@@ -25,11 +27,18 @@ fun LazySuccessContent(
     LazyColumn(
         state = lazyListState,
         contentPadding = paddingValues,
-        verticalArrangement = verticalArrangement
+        verticalArrangement = verticalArrangement,
+        modifier = modifier
     ) {
         beforeMarkdownScope.invoke(this)
-        item("content") {
-            MarkdownSuccess(state, components, modifier)
+
+        itemsIndexed(state.node.children, key = { index, _ -> index }) { index, node ->
+            MarkdownElement(
+                node,
+                components,
+                state.content,
+                skipLinkDefinition = state.linksLookedUp
+            )
         }
         afterMarkdownScope.invoke(this)
     }

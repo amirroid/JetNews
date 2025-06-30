@@ -109,21 +109,19 @@ fun ArticleDetail(
                 paddingValues = WindowInsets.navigationBars.asPaddingValues() + PaddingValues(
                     vertical = verticalPadding
                 ),
-                verticalArrangement = Arrangement.spacedBy(12.dp),
                 beforeMarkdownScope = {
                     item("title") {
                         JetText(
                             article.title,
                             style = MaterialTheme.typography.headlineMedium,
-                            modifier = Modifier.horizontalPadding()
                         )
                     }
                     item("article_info") {
-                        ArticleInfo(article)
+                        ArticleInfo(article, modifier = Modifier.padding(top = 12.dp))
                     }
                     if (article.tags.isNotEmpty()) {
                         item("tags") {
-                            ArticleTags(article)
+                            ArticleTags(article, modifier = Modifier.padding(top = 12.dp))
                         }
                     }
                     article.picture?.let {
@@ -131,7 +129,7 @@ fun ArticleDetail(
                             AsyncImage(
                                 model = it,
                                 contentDescription = article.title,
-                                modifier = Modifier.fillMaxWidth(),
+                                modifier = Modifier.fillMaxWidth().padding(vertical = 12.dp),
                                 contentScale = ContentScale.FillWidth
                             )
                         }
@@ -142,7 +140,7 @@ fun ArticleDetail(
                         item("comments_bar") {
                             JetText(
                                 "Comments",
-                                modifier = Modifier.horizontalPadding().topPadding(),
+                                modifier = Modifier.padding(top = 36.dp),
                                 style = MaterialTheme.typography.titleLarge
                             )
                         }
@@ -157,11 +155,11 @@ fun ArticleDetail(
 }
 
 @Composable
-fun ArticleInfo(article: ArticleDetailUiModel) {
+fun ArticleInfo(article: ArticleDetailUiModel, modifier: Modifier = Modifier) {
     FlowRow(
         verticalArrangement = Arrangement.Center,
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.alpha(0.8f).horizontalPadding(),
+        modifier = modifier.alpha(0.8f),
         itemVerticalAlignment = Alignment.CenterVertically
     ) {
         AsyncImage(
@@ -198,10 +196,10 @@ fun ArticleInfo(article: ArticleDetailUiModel) {
 }
 
 @Composable
-fun ArticleTags(article: ArticleDetailUiModel) {
+fun ArticleTags(article: ArticleDetailUiModel, modifier: Modifier = Modifier) {
     FlowRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp),
-        modifier = Modifier.alpha(0.8f).horizontalPadding(),
+        modifier = modifier.alpha(0.8f),
         itemVerticalAlignment = Alignment.CenterVertically
     ) {
         Text(
@@ -221,7 +219,7 @@ fun ArticleTags(article: ArticleDetailUiModel) {
 
 fun LazyListScope.commentItem(comment: CommentUiModel, index: Int = 0) {
     item("comment_item_${comment.id}") {
-        CommentItem(comment, index)
+        CommentItem(comment, index, modifier = Modifier.padding(top = 12.dp))
     }
     comment.children.forEach {
         commentItem(it, index + 1)
@@ -229,10 +227,9 @@ fun LazyListScope.commentItem(comment: CommentUiModel, index: Int = 0) {
 }
 
 @Composable
-fun CommentItem(comment: CommentUiModel, index: Int) {
+fun CommentItem(comment: CommentUiModel, index: Int, modifier: Modifier = Modifier) {
     Row(
-        modifier = Modifier
-            .horizontalPadding()
+        modifier = modifier
             .padding(start = horizontalPadding * index.minus(1).coerceAtLeast(0))
     ) {
         if (index != 0) {

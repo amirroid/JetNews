@@ -75,6 +75,6 @@ internal object CoilImageTransformer : ImageTransformer {
         val dpSize = with(density) { targetSize.toDpSize() }
         val finalSize = Size(dpSize.width.value, dpSize.height.value)
 
-        return PlaceholderConfig(size = finalSize)
+        return PlaceholderConfig(size = finalSize, animate = false)
     }
 }
