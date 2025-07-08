@@ -9,7 +9,7 @@ plugins {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.paging.runtime)
+            implementation(libs.paging.compose)
 
             implementation(project(ProjectPaths.domain))
             implementation(project(ProjectPaths.paging))

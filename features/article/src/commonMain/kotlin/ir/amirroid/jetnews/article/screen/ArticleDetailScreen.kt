@@ -65,16 +65,18 @@ fun ArticleDetailScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
-    state
-        .onSuccess {
-            ArticleDetail(it, onBackPress)
-        }
-        .onLoading { LoadingContent() }
-        .onError {
-            Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                PagingErrorButton(onRetry = viewModel::retry)
+    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+        state
+            .onSuccess {
+                ArticleDetail(it, onBackPress)
             }
-        }
+            .onLoading { LoadingContent() }
+            .onError {
+                Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    PagingErrorButton(onRetry = viewModel::retry)
+                }
+            }
+    }
 }
 
 

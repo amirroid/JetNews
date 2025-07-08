@@ -15,7 +15,7 @@ class ArticleApiServiceImpl(
 ) : ArticleApiService {
     override suspend fun getAllArticles(page: Int): Response<List<ArticleResponse>, NetworkErrors> =
         SafeApiCall.launch {
-            httpClient.get("${PATH_PREFIX}/") {
+            httpClient.get("${PATH_PREFIX}/latest") {
                 parameter("per_page", PER_PAGE_COUNT)
                 parameter("page", page)
             }

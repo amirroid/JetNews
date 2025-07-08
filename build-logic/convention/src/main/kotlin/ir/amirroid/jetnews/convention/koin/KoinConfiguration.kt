@@ -25,7 +25,6 @@ private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<K
         implementation(libs.findLibrary("koin-core").get())
         implementation(libs.findLibrary("koin-compose").get())
         implementation(libs.findLibrary("koin-compose-viewmodel").get())
-        implementation(libs.findLibrary("koin-compose-viewmodel-navigation").get())
     }
 }
 

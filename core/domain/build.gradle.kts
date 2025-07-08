@@ -6,6 +6,6 @@ plugins {
 
 kotlin.sourceSets.commonMain {
     dependencies {
-        implementation(libs.paging.runtime)
+        implementation(libs.paging.compose)
     }
 }

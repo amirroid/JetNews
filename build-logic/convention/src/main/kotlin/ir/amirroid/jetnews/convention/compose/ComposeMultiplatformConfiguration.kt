@@ -33,10 +33,10 @@ private fun Project.configureCommonMain(sourceSets: NamedDomainObjectContainer<K
         implementation(dependencies.components.resources)
         implementation(dependencies.components.uiToolingPreview)
 
-        implementation(libs.findLibrary("androidx-lifecycle-viewmodel").get())
-        implementation(libs.findLibrary("androidx-lifecycle-runtimeCompose").get())
         implementation(libs.findLibrary("compose-navigation").get())
         implementation(libs.findLibrary("coil-compose").get())
+        implementation(libs.findLibrary("androidx-lifecycle-viewmodel").get())
+        implementation(libs.findLibrary("androidx-lifecycle-runtimeCompose").get())
 
         val designSystemPath = ":core:design-system"
         val composeCommon = ":core:common:compose"

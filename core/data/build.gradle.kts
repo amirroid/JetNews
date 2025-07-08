@@ -9,7 +9,7 @@ kotlin.sourceSets {
     commonMain {
         dependencies {
             implementation(libs.ktor.client.core)
-            implementation(libs.paging.runtime)
+            implementation(libs.paging.compose)
             implementation(libs.room.runtime)
 
             implementation(project(ProjectPaths.domain))

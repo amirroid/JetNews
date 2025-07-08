@@ -1,8 +1,7 @@
 package ir.amirroid.jetnews.data.paging.article
 
-import androidx.paging.PagingSource
-import androidx.paging.PagingState
-import co.touchlab.kermit.Logger
+import app.cash.paging.PagingSource
+import app.cash.paging.PagingState
 import ir.amirroid.jetnews.common.base.response.Response
 import ir.amirroid.jetnews.data.datasources.remote.article.ArticleRemoteDataSource
 import ir.amirroid.jetnews.data.models.article.ArticleResponse
@@ -24,7 +23,6 @@ class ArticlePagingSource(
         return when (val response = articleRemoteDataSource.getAllArticles(currentPage)) {
             is Response.Success -> {
                 val data = response.data
-                Logger.withTag("sdasdas").d { "$currentPage ${data.size}" }
                 LoadResult.Page(
                     data = data,
                     prevKey = if (currentPage == 1) null else currentPage - 1,
